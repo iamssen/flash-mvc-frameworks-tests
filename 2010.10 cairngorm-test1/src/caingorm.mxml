@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml"
+				layout="absolute"
+				xmlns:view="seoyeon2.view.*"
+				xmlns:control="seoyeon2.control.*"
+				xmlns:business="seoyeon2.business.*"
+				initialize="init()">
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import flash.utils.getQualifiedClassName;
+
+			private function init():void
+			{
+				addEventListener(Event.ADDED_TO_STAGE, addedToStage);
+			}
+
+			private function addedToStage(event:Event):void
+			{
+				trace(this, this.parent, this.parent.parent);
+				Alert.show("aaaaaa");
+				navigateContainer(stage);
+			}
+
+			private function traceDisplay(depth:int, display:DisplayObject):void
+			{
+				var s:int;
+				var tab:String;
+				s=-1;
+				tab="";
+				while (++s <= depth)
+				{
+					tab+="  ";
+				}
+				trace(tab + display.toString());
+			}
+
+			private function navigateContainer(container:DisplayObjectContainer, depth:int=0):void
+			{
+				//trace("container numchildren", getQualifiedClassName(container), container.numChildren);
+				try
+				{
+					var f:int=-1;
+					var max:int=container.numChildren;
+					var display:DisplayObject;
+					while (++f <= max)
+					{
+						display=container.getChildAt(f);
+						if (depth < 5 && display is DisplayObjectContainer && DisplayObjectContainer(display).numChildren > 0)
+						{
+							traceDisplay(depth, display);
+							navigateContainer(DisplayObjectContainer(display), depth + 1);
+						}
+						else
+						{
+							traceDisplay(depth + 1, display);
+						}
+					}
+				}
+				catch (e:Error)
+				{
+					//traceDisplay(depth, container);
+				}
+			}
+		]]>
+	</mx:Script>
+	<control:Seoyeon2Control id="control"/>
+	<business:Seoyeon2Services id="service"/>
+	<view:seoyeon2comp1 id="comp1"
+						x="10"
+						y="10"/>
+	<view:seoyeon2comp1 id="comp3"
+						x="10"
+						y="10"/>
+	<view:seoyeon2comp2 id="comp2"
+						x="10"
+						y="120"/>
+	<mx:Panel id="aaa"
+			  x="100"
+			  y="10">
+		<view:seoyeon2comp1 id="comp4"
+							x="10"
+							y="10"/>
+	</mx:Panel>
+	<mx:Panel id="bbb"
+			  x="250"
+			  y="10">
+		<view:seoyeon2comp1 id="comp5"
+							x="10"
+							y="10"/>
+	</mx:Panel>
+
+</mx:Application>

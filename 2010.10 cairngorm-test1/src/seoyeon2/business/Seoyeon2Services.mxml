@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cairngorm:ServiceLocator xmlns:mx="http://www.adobe.com/2006/mxml"
+						  xmlns:cairngorm="com.adobe.cairngorm.business.*">
+	<mx:RemoteObject id="seoyeonService"
+					 destination="ucemsseoyeon"
+					 showBusyCursor="true"
+					 requestTimeout="20"
+					 result="event.token.resultHandler( event );"
+					 fault="event.token.faultHandler( event );">
+
+		<mx:channelSet>
+			<mx:ChannelSet>
+				<mx:channels>
+					<mx:AMFChannel uri="/messagebroker/amf"/>
+				</mx:channels>
+			</mx:ChannelSet>
+		</mx:channelSet>
+
+	</mx:RemoteObject>
+</cairngorm:ServiceLocator>

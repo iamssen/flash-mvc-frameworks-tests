@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fx:Object xmlns:fx="http://ns.adobe.com/mxml/2009">
+	<fx:Declarations>
+		<fx:Number id="mid" />
+		<fx:String id="name" />
+		<fx:Number id="age" />	
+	</fx:Declarations>
+</fx:Object>

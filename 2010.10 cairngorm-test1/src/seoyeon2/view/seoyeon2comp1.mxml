@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+		   width="100"
+		   height="100"
+		   initialize="init()"
+		   xmlns:control="seoyeon2.control.*"
+		   xmlns:business="seoyeon2.business.*">
+	<mx:Script>
+		<![CDATA[
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			import seoyeon2.control.Seoyeon2Control;
+			import seoyeon2.vo.Seoyeon2VO;
+			import seoyeon2.control.Seoyeon2Event;
+			import com.adobe.cairngorm.control.CairngormEventDispatcher;
+
+			private function init():void
+			{
+				var vo:Seoyeon2VO=new Seoyeon2VO;
+				vo.name="ssen";
+				CairngormEventDispatcher.getInstance().dispatchEvent(new Seoyeon2Event(vo, result));
+			}
+
+			private function result(success:Boolean, vo:Seoyeon2VO=null):void
+			{
+				trace("result", success, vo);
+			}
+		]]>
+	</mx:Script>
+</mx:Canvas>

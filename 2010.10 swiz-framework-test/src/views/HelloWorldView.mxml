@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" width="400" height="300"
+		 xmlns:models="models.*" xmlns:swiz="http://swiz.swizframework.org" xmlns:local="*">
+	<fx:Script>
+		<![CDATA[
+			import events.HelloWorldEvent;
+			
+			import models.HelloWorldModel;
+			[Autowire]
+			[Bindable]
+			public var model:HelloWorldModel;
+
+			private function click():void {
+				var msg:String="foo";
+				var evt:HelloWorldEvent=new HelloWorldEvent(HelloWorldEvent.HELLO, msg, true);
+				//dispatchEvent(evt);
+				dispatchEvent(new Event("changeView"));
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<swiz:Swiz>
+			<swiz:beanProviders>
+				<local:Beans/>
+			</swiz:beanProviders>
+			<swiz:config>
+				<swiz:SwizConfig setUpEventType="{Event.ADDED_TO_STAGE}" setUpEventPhase="{EventPhase.CAPTURING_PHASE}" setUpEventPriority="50" tearDownEventType="{Event.REMOVED_FROM_STAGE}"
+								 tearDownEventPhase="{EventPhase.CAPTURING_PHASE}" tearDownEventPriority="50" eventPackages="events.*" viewPackages="views.*"
+								 defaultDispatcher="global"/>
+			</swiz:config>
+		</swiz:Swiz>
+		<local:TestMXML />
+	</fx:Declarations>
+	<s:TextInput x="10" y="10"/>
+	<s:Button x="10" y="40" label="Button" click="click()"/>
+
+</s:Group>

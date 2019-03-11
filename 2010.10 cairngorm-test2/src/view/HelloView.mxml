@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark" width="400" height="300"
+		 xmlns:models="models.*" xmlns:control="control.*" xmlns:business="business.*">
+	<fx:Script>
+		<![CDATA[
+			import com.adobe.cairngorm.control.CairngormEvent;
+			import com.adobe.cairngorm.control.CairngormEventDispatcher;
+			
+			import control.HelloCommands;
+			
+			private function click1():void {
+				var evt:CairngormEvent = new CairngormEvent(HelloCommands.SAY_HELLO);
+				evt.data = {model:m};
+				CairngormEventDispatcher.getInstance().dispatchEvent(evt);
+			}
+			
+			private function click2():void {
+				var evt:CairngormEvent = new CairngormEvent(HelloCommands.A_YO);
+				evt.data = {model:m};
+				CairngormEventDispatcher.getInstance().dispatchEvent(evt);
+			}
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<models:HelloModel message="-" id="m"/>
+		<control:HelloController id="c"/>
+		<business:HelloServices id="b"/>
+	</fx:Declarations>
+	<s:Button x="10" y="10" label="hello" click="click1()"/>
+	<s:Button x="88" y="10" label="a yo" click="click2()"/>
+	<s:TextInput x="10" y="39" text="{m.message}"/>
+</s:Group>
